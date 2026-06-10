@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Alyaa Azzam — Frontend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080810;
+  --bg2:#0e0e1a;
+  --bg3:#13131f;
+  --card:#161622;
+  --card2:#1c1c2e;
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.12);
+  --accent:#8b5cf6;
+  --accent2:#a78bfa;
+  --accent3:#7c3aed;
+  --glow:rgba(139,92,246,0.25);
+  --text:#f1f0fb;
+  --muted:#8b8aa8;
+  --muted2:#55546e;
+  --mono:'DM Mono',monospace;
+  --sans:'Plus Jakarta Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;overflow-x:hidden}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent3);border-radius:2px}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 3rem;height:64px;
+  background:rgba(8,8,16,0.8);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:var(--sans);font-weight:800;font-size:1.05rem;
+  letter-spacing:-0.01em;color:var(--text);
+  display:flex;align-items:center;gap:0.4rem;
+}
+.nav-logo span{color:var(--accent2)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  font-family:var(--mono);font-size:0.75rem;
+  letter-spacing:0.06em;color:var(--muted);
+  text-decoration:none;transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--text)}
+.nav-cv{
+  font-family:var(--mono);font-size:0.75rem;
+  letter-spacing:0.06em;
+  background:transparent;
+  border:1px solid var(--border2);
+  color:var(--accent2);
+  padding:0.45rem 1.1rem;
+  border-radius:6px;
+  text-decoration:none;
+  transition:background 0.2s,border-color 0.2s;
+}
+.nav-cv:hover{background:rgba(139,92,246,0.1);border-color:var(--accent)}
+
+/* ─── HERO ─── */
+#hero{
+  min-height:100vh;
+  padding-top:64px;
+  display:flex;align-items:center;
+  position:relative;overflow:hidden;
+}
+.hero-grid-bg{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(139,92,246,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(139,92,246,0.04) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent);
+}
+.hero-blob{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(100px);
+  pointer-events:none;
+}
+.blob1{width:500px;height:500px;background:rgba(139,92,246,0.12);top:-100px;right:-100px}
+.blob2{width:400px;height:400px;background:rgba(76,29,149,0.1);bottom:-80px;left:10%}
+
+.hero-inner{
+  max-width:1100px;margin:0 auto;padding:3rem 3rem;
+  display:grid;grid-template-columns:1fr 380px;
+  gap:5rem;align-items:center;
+  position:relative;z-index:1;width:100%;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-family:var(--mono);font-size:0.72rem;
+  letter-spacing:0.1em;color:var(--accent2);
+  background:rgba(139,92,246,0.1);
+  border:1px solid rgba(139,92,246,0.25);
+  padding:0.35rem 0.85rem;border-radius:100px;
+  margin-bottom:1.5rem;
+}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+h1.name{
+  font-size:clamp(3.2rem,6.5vw,5.5rem);
+  font-weight:800;line-height:1;
+  letter-spacing:-0.03em;
+  margin-bottom:0.5rem;
+}
+h1.name .accent{
+  background:linear-gradient(135deg,var(--accent2),#c4b5fd);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-title{
+  font-size:1.1rem;font-weight:400;
+  color:var(--muted);margin-bottom:1.5rem;
+  letter-spacing:0.01em;
+}
+.hero-bio{
+  font-size:0.97rem;line-height:1.8;
+  color:var(--muted);max-width:480px;
+  margin-bottom:2.5rem;
+}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem}
+.cta-primary{
+  background:var(--accent);color:#fff;
+  padding:0.8rem 2rem;border-radius:10px;
+  font-weight:600;font-size:0.9rem;
+  text-decoration:none;
+  transition:transform 0.2s,box-shadow 0.2s;
+  box-shadow:0 0 0 0 var(--glow);
+}
+.cta-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px var(--glow)}
+.cta-secondary{
+  background:var(--card);color:var(--text);
+  padding:0.8rem 2rem;border-radius:10px;
+  font-weight:500;font-size:0.9rem;
+  text-decoration:none;border:1px solid var(--border2);
+  transition:background 0.2s,border-color 0.2s;
+}
+.cta-secondary:hover{background:var(--card2);border-color:var(--accent)}
+.hero-tech{
+  display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;
+}
+.hero-tech-label{
+  font-family:var(--mono);font-size:0.68rem;
+  color:var(--muted2);letter-spacing:0.08em;margin-right:0.3rem;
+}
+.tech-pill{
+  font-family:var(--mono);font-size:0.7rem;
+  color:var(--muted);background:var(--bg3);
+  border:1px solid var(--border);
+  padding:0.25rem 0.65rem;border-radius:100px;
+}
+
+/* ─── PHOTO CARD ─── */
+.photo-card{
+  position:relative;
+}
+.photo-card-inner{
+  width:100%;aspect-ratio:1/1;
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid var(--border2);
+  position:relative;
+}
+.photo-card-inner img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:top center;
+}
+.photo-card-inner::after{
+  content:'';position:absolute;
+  bottom:0;left:0;right:0;height:40%;
+  background:linear-gradient(transparent,rgba(8,8,16,0.6));
+}
+/* decorative corner accents */
+.photo-card::before{
+  content:'';position:absolute;
+  top:-8px;right:-8px;width:60px;height:60px;
+  border-top:2px solid var(--accent);
+  border-right:2px solid var(--accent);
+  border-radius:0 8px 0 0;
+}
+.photo-card::after{
+  content:'';position:absolute;
+  bottom:-8px;left:-8px;width:60px;height:60px;
+  border-bottom:2px solid var(--accent);
+  border-left:2px solid var(--accent);
+  border-radius:0 0 0 8px;
+}
+.photo-info{
+  position:absolute;bottom:16px;left:16px;right:16px;
+  z-index:1;
+  background:rgba(8,8,16,0.7);
+  backdrop-filter:blur(12px);
+  border:1px solid var(--border2);
+  border-radius:10px;
+  padding:0.75rem 1rem;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.photo-info-name{font-weight:700;font-size:0.9rem}
+.photo-info-role{font-size:0.72rem;color:var(--muted);font-family:var(--mono)}
+.photo-status{
+  display:flex;align-items:center;gap:0.4rem;
+  font-family:var(--mono);font-size:0.65rem;color:#4ade80;
+}
+.status-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite}
+
+/* ─── SECTION BASE ─── */
+.section{padding:6rem 0;position:relative}
+.container{max-width:1100px;margin:0 auto;padding:0 3rem}
+.sec-label{
+  font-family:var(--mono);font-size:0.7rem;
+  letter-spacing:0.14em;color:var(--accent2);
+  text-transform:uppercase;margin-bottom:0.5rem;
+  display:flex;align-items:center;gap:0.75rem;
+}
+.sec-label::before{content:'';width:24px;height:1px;background:var(--accent)}
+.sec-title{
+  font-size:clamp(1.8rem,3vw,2.6rem);
+  font-weight:800;letter-spacing:-0.02em;
+  line-height:1.15;margin-bottom:0.75rem;
+}
+.sec-divider{
+  width:1px;height:40px;background:linear-gradient(var(--accent),transparent);
+  margin-bottom:3rem;
+}
+
+/* ─── ABOUT ─── */
+#about{background:var(--bg2)}
+.about-wrap{display:grid;grid-template-columns:1.1fr 0.9fr;gap:5rem;align-items:start}
+.about-text p{font-size:0.97rem;color:var(--muted);line-height:1.85;margin-bottom:1rem}
+.about-cards{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:14px;overflow:hidden}
+.about-stat{
+  background:var(--card);padding:1.4rem;
+  transition:background 0.2s;
+}
+.about-stat:hover{background:var(--card2)}
+.stat-val{
+  font-size:2rem;font-weight:800;
+  color:var(--accent2);letter-spacing:-0.02em;margin-bottom:0.25rem;
+  font-family:var(--sans);
+}
+.stat-lbl{font-size:0.78rem;color:var(--muted);line-height:1.4}
+
+/* ─── SKILLS ─── */
+#skills{}
+.skills-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:16px;overflow:hidden}
+.skill-group{background:var(--card);padding:1.6rem;transition:background 0.2s}
+.skill-group:hover{background:var(--card2)}
+.skill-group-name{
+  font-family:var(--mono);font-size:0.68rem;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--accent2);margin-bottom:1.1rem;
+}
+.skill-items{display:flex;flex-direction:column;gap:0.55rem}
+.skill-item{
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:0.87rem;color:var(--muted);
+  padding-bottom:0.55rem;
+  border-bottom:1px solid var(--border);
+}
+.skill-item:last-child{border:none;padding:0}
+.skill-bar{
+  width:48px;height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;
+}
+.skill-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent3),var(--accent2))}
+
+/* ─── EXPERIENCE ─── */
+#experience{background:var(--bg2)}
+.exp-grid{display:grid;grid-template-columns:1fr;gap:0}
+.exp-row{
+  display:grid;grid-template-columns:200px 1fr;
+  gap:0;
+  border-bottom:1px solid var(--border);
+  padding:2.25rem 0;
+  position:relative;
+}
+.exp-row:first-child{border-top:1px solid var(--border)}
+.exp-row::before{
+  content:'';
+  position:absolute;left:196px;top:2.25rem;
+  width:8px;height:8px;border-radius:50%;
+  background:var(--accent);
+  border:2px solid var(--bg2);
+}
+.exp-left{padding-right:2rem}
+.exp-date{
+  font-family:var(--mono);font-size:0.68rem;
+  letter-spacing:0.07em;color:var(--accent);
+  margin-bottom:0.4rem;
+}
+.exp-org{font-size:0.83rem;font-weight:600;color:var(--muted);line-height:1.35}
+.exp-right{padding-left:2.5rem;border-left:1px solid var(--border)}
+.exp-badge{
+  display:inline-block;
+  font-family:var(--mono);font-size:0.62rem;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--accent2);background:rgba(139,92,246,0.1);
+  border:1px solid rgba(139,92,246,0.2);
+  padding:0.18rem 0.6rem;border-radius:100px;
+  margin-bottom:0.5rem;
+}
+.exp-role{font-size:1rem;font-weight:700;margin-bottom:0.65rem;color:var(--text)}
+.exp-points{list-style:none;display:flex;flex-direction:column;gap:0.4rem}
+.exp-points li{
+  font-size:0.87rem;color:var(--muted);
+  padding-left:1.1rem;position:relative;line-height:1.6;
+}
+.exp-points li::before{
+  content:'▸';position:absolute;left:0;
+  color:var(--accent);font-size:0.7rem;top:0.1em;
+}
+
+/* ─── PROJECTS ─── */
+#projects{}
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+.proj-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  overflow:hidden;
+  transition:border-color 0.25s,transform 0.25s,box-shadow 0.25s;
+  display:flex;flex-direction:column;
+}
+.proj-card:hover{
+  border-color:rgba(139,92,246,0.4);
+  transform:translateY(-5px);
+  box-shadow:0 20px 60px rgba(0,0,0,0.4);
+}
+.proj-img-wrap{
+  width:100%;height:210px;overflow:hidden;
+  position:relative;background:var(--bg3);
+}
+.proj-img-wrap img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:top;
+  transition:transform 0.4s ease;
+}
+.proj-card:hover .proj-img-wrap img{transform:scale(1.04)}
+.proj-img-placeholder{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:0.75rem;position:relative;overflow:hidden;
+}
+.proj-img-placeholder svg{width:36px;height:36px;opacity:0.2;color:var(--text)}
+.proj-img-placeholder span{
+  font-family:var(--mono);font-size:0.7rem;
+  color:var(--muted2);opacity:0.5;
+}
+.proj-overlay{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  gap:0.75rem;
+  background:rgba(8,8,16,0.7);
+  opacity:0;transition:opacity 0.25s;
+  backdrop-filter:blur(4px);
+}
+.proj-card:hover .proj-overlay{opacity:1}
+.proj-overlay-btn{
+  font-family:var(--mono);font-size:0.72rem;
+  letter-spacing:0.08em;text-transform:uppercase;
+  color:#fff;text-decoration:none;
+  background:rgba(139,92,246,0.9);
+  padding:0.5rem 1rem;border-radius:6px;
+  transition:background 0.2s;
+}
+.proj-overlay-btn.ghost{background:rgba(255,255,255,0.1)}
+.proj-overlay-btn:hover{background:var(--accent)}
+
+.proj-body{padding:1.4rem 1.5rem;flex:1;display:flex;flex-direction:column}
+.proj-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.9rem}
+.proj-tag{
+  font-family:var(--mono);font-size:0.65rem;
+  letter-spacing:0.06em;
+  color:var(--accent2);
+  background:rgba(139,92,246,0.1);
+  border:1px solid rgba(139,92,246,0.2);
+  padding:0.2rem 0.6rem;border-radius:100px;
+}
+.proj-name{
+  font-size:1.1rem;font-weight:800;
+  letter-spacing:-0.01em;margin-bottom:0.5rem;
+}
+.proj-desc{
+  font-size:0.87rem;color:var(--muted);
+  line-height:1.7;flex:1;margin-bottom:1.1rem;
+}
+.proj-footer{
+  display:flex;justify-content:space-between;
+  align-items:center;
+  border-top:1px solid var(--border);
+  padding-top:1rem;
+}
+.proj-links-row{display:flex;gap:1rem}
+.proj-link{
+  font-family:var(--mono);font-size:0.72rem;
+  letter-spacing:0.06em;
+  color:var(--muted);text-decoration:none;
+  display:flex;align-items:center;gap:0.3rem;
+  transition:color 0.2s;
+}
+.proj-link:hover{color:var(--accent2)}
+.proj-link svg{width:11px;height:11px}
+.proj-year{
+  font-family:var(--mono);font-size:0.65rem;
+  color:var(--muted2);letter-spacing:0.06em;
+}
+
+/* ─── CONTACT ─── */
+#contact{background:var(--bg2)}
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.contact-intro{font-size:0.97rem;color:var(--muted);line-height:1.8;margin-bottom:2rem}
+.contact-dl{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  background:var(--accent);color:#fff;
+  padding:0.8rem 1.8rem;border-radius:10px;
+  font-size:0.88rem;font-weight:600;
+  text-decoration:none;
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.contact-dl:hover{transform:translateY(-2px);box-shadow:0 8px 32px var(--glow)}
+.contact-dl svg{width:16px;height:16px}
+.contact-items{display:flex;flex-direction:column;gap:0.75rem}
+.contact-item{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem 1.25rem;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;text-decoration:none;
+  transition:border-color 0.2s,background 0.2s,transform 0.2s;
+}
+.contact-item:hover{border-color:rgba(139,92,246,0.4);background:var(--card2);transform:translateX(4px)}
+.c-icon{
+  width:38px;height:38px;border-radius:9px;
+  background:rgba(139,92,246,0.12);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.c-icon svg{width:17px;height:17px;color:var(--accent2)}
+.c-info{flex:1}
+.c-type{font-family:var(--mono);font-size:0.63rem;letter-spacing:0.1em;color:var(--muted2);text-transform:uppercase;margin-bottom:0.15rem}
+.c-val{font-size:0.87rem;color:var(--text);font-weight:500}
+.c-arrow{color:var(--muted2);font-size:0.9rem;transition:transform 0.2s,color 0.2s}
+.contact-item:hover .c-arrow{transform:translateX(3px);color:var(--accent2)}
+
+/* ─── FOOTER ─── */
+footer{
+  padding:1.75rem 3rem;
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.footer-left{font-family:var(--mono);font-size:0.7rem;color:var(--muted2);letter-spacing:0.06em}
+.footer-right{font-family:var(--mono);font-size:0.7rem;color:var(--muted2)}
+
+/* ─── ANIMATIONS ─── */
+.fade{opacity:0;transform:translateY(22px);transition:opacity 0.65s ease,transform 0.65s ease}
+.fade.in{opacity:1;transform:none}
+.fade-d1{transition-delay:0.1s}
+.fade-d2{transition-delay:0.2s}
+.fade-d3{transition-delay:0.3s}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  .container{padding:0 1.5rem}
+  .hero-inner{grid-template-columns:1fr;padding:2rem 1.5rem}
+  .photo-card{max-width:280px;margin:0 auto}
+  .about-wrap,.contact-wrap{grid-template-columns:1fr}
+  .skills-wrap{grid-template-columns:1fr 1fr}
+  .exp-row{grid-template-columns:1fr}
+  .exp-row::before{display:none}
+  .exp-left{border-bottom:1px solid var(--border);padding:0 0 0.75rem;margin-bottom:0.75rem}
+  .exp-right{padding-left:0;border:none}
+  .proj-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:0.5rem;text-align:center;padding:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Alyaa <span>Azzam</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+  <a href="Alyaa_Azzam_resume.pdf" download class="nav-cv">Download CV</a>
+</nav>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-blob blob1"></div>
+  <div class="hero-blob blob2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Available for opportunities
+      </div>
+      <h1 class="name">Alyaa<br/><span class="accent">Azzam</span></h1>
+      <p class="hero-title">Frontend Developer &amp; UI/UX Enthusiast</p>
+      <p class="hero-bio">Building responsive, cross-platform interfaces that bridge the gap between beautiful design and clean, functional code.</p>
+      <div class="hero-ctas">
+        <a href="#projects" class="cta-primary">View My Work</a>
+        <a href="#contact" class="cta-secondary">Get In Touch</a>
+      </div>
+      <div class="hero-tech">
+        <span class="hero-tech-label">Stack —</span>
+        <span class="tech-pill">React</span>
+        <span class="tech-pill">Next.js</span>
+        <span class="tech-pill">TypeScript</span>
+        <span class="tech-pill">Tailwind</span>
+        <span class="tech-pill">React Native</span>
+      </div>
+    </div>
+    <div class="photo-card">
+      <div class="photo-card-inner">
+        <img src="WhatsApp Image 2026-06-06 at 4.26.39 PM.jpeg" alt="Alyaa Azzam"/>
+        <div class="photo-info">
+          <div>
+            <div class="photo-info-name">Alyaa Azzam</div>
+            <div class="photo-info-role">Frontend Developer</div>
+          </div>
+          <div class="photo-status">
+            <span class="status-dot"></span>Open to work
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ ABOUT ══════════════════ -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="fade">
+      <div class="sec-label">01 — about</div>
+      <h2 class="sec-title">Who I Am</h2>
+      <div class="sec-divider"></div>
+    </div>
+    <div class="about-wrap">
+      <div class="about-text fade fade-d1">
+        <p>I'm a Junior Frontend Developer specializing in responsive, cross-platform interfaces. I translate complex UI/UX designs into clean, accessible, performant web and mobile experiences.</p>
+        <p>With a unique blend of Business Administration from Damanhour University and intensive technical training across four specialized programs at ITI, NTI, and DEPi, I bring both strategic thinking and technical execution to every project.</p>
+        <p>Currently graduating from ITI's Post-Graduate Frontend & Cross-Platform Mobile Development program, mastering React Native and modern mobile deployment workflows.</p>
+      </div>
+      <div class="fade fade-d2">
+        <div class="about-cards">
+          <div class="about-stat">
+            <div class="stat-val">4+</div>
+            <div class="stat-lbl">Scholarships & programs completed</div>
+          </div>
+          <div class="about-stat">
+            <div class="stat-val">6+</div>
+            <div class="stat-lbl">Projects shipped</div>
+          </div>
+          <div class="about-stat">
+            <div class="stat-val">20+</div>
+            <div class="stat-lbl">Team members led at Enactus</div>
+          </div>
+          <div class="about-stat">
+            <div class="stat-val">2026</div>
+            <div class="stat-lbl">Available now</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ SKILLS ══════════════════ -->
+<section id="skills" class="section">
+  <div class="container">
+    <div class="fade">
+      <div class="sec-label">02 — skills</div>
+      <h2 class="sec-title">What I Work With</h2>
+      <div class="sec-divider"></div>
+    </div>
+    <div class="skills-wrap fade fade-d1">
+      <div class="skill-group">
+        <div class="skill-group-name">Languages</div>
+        <div class="skill-items">
+          <div class="skill-item"><span>HTML5</span><div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div></div>
+          <div class="skill-item"><span>CSS3</span><div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div></div>
+          <div class="skill-item"><span>JavaScript</span><div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div></div>
+          <div class="skill-item"><span>TypeScript</span><div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div></div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Frameworks</div>
+        <div class="skill-items">
+          <div class="skill-item"><span>React.js</span><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div></div>
+          <div class="skill-item"><span>Next.js</span><div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div></div>
+          <div class="skill-item"><span>React Native</span><div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div></div>
+          <div class="skill-item"><span>Angular</span><div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div></div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Styling & Tools</div>
+        <div class="skill-items">
+          <div class="skill-item"><span>Tailwind CSS</span><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+          <div class="skill-item"><span>Bootstrap</span><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+          <div class="skill-item"><span>Figma</span><div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div></div>
+          <div class="skill-item"><span>Git</span><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ EXPERIENCE ══════════════════ -->
+<section id="experience" class="section">
+  <div class="container">
+    <div class="fade">
+      <div class="sec-label">03 — experience</div>
+      <h2 class="sec-title">My Journey</h2>
+      <div class="sec-divider"></div>
+    </div>
+    <div class="exp-grid">
+
+      <div class="exp-row fade">
+        <div class="exp-left">
+          <div class="exp-date">Jan 2026 — Present</div>
+          <div class="exp-org">Information Technology Institute (ITI)</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-badge">Post-Graduate Scholarship</div>
+          <div class="exp-role">Front-End Cross-Platform Mobile Development</div>
+          <ul class="exp-points">
+            <li>Intensive training on high-performance mobile apps with React Native</li>
+            <li>Cross-platform deployment, state management, native module integration</li>
+            <li>Production-ready components focused on smooth UX and performance</li>
+          </ul>
+        </div>
+      </div>
+  <div class="exp-row fade">
+        <div class="exp-left">
+          <div class="exp-date">Nov 2025- present</div>
+          <div class="exp-org">Digital Egypt Pioneers (DEPi)</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-badge">6-Month Scholarship</div>
+          <div class="exp-role">Front-End Development with Angular</div>
+          <ul class="exp-points">
+            <li>Specialized Angular framework and component-based architecture training</li>
+            <li>Built scalable enterprise-level front-end applications</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-row fade">
+        <div class="exp-left">
+          <div class="exp-date">Nov — Dec 2025</div>
+          <div class="exp-org">National Technology Institute (NTI)</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-badge">Scholarship</div>
+          <div class="exp-role">Front-End Web Development</div>
+          <ul class="exp-points">
+            <li>Modern front-end architecture with ES6+, React, and CSS frameworks</li>
+            <li>Responsive layouts and cross-browser compatibility problem solving</li>
+            <li>Industry best practices for clean, modular code</li>
+          </ul>
+        </div>
+      </div>
+
+    
+
+      <div class="exp-row fade">
+        <div class="exp-left">
+          <div class="exp-date">Summer 2025</div>
+          <div class="exp-org">Information Technology Institute (ITI)</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-badge">Internship</div>
+          <div class="exp-role">UI/UX Design</div>
+          <ul class="exp-points">
+            <li>User-centered design, wireframing, high-fidelity prototyping in Figma</li>
+            <li>Interactive prototypes and design systems for web and mobile</li>
+            <li>Usability testing and accessibility standards</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-row fade">
+        <div class="exp-left">
+          <div class="exp-date">2023 — 2025</div>
+          <div class="exp-org">Enactus Damanhour</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-badge">Volunteering</div>
+          <div class="exp-role">Head of Marketing</div>
+          <ul class="exp-points">
+            <li>Led 20+ members developing branding strategies for social projects</li>
+            <li>Facilitated workshops on visual communication and project management</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-row fade">
+        <div class="exp-left">
+          <div class="exp-date">2021 — 2025</div>
+          <div class="exp-org">Damanhour University</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-badge">Education</div>
+          <div class="exp-role">B.S. Business Administration — Faculty of Commerce (English)</div>
+          <ul class="exp-points">
+            <li>Foundation in business strategy, marketing, and analytical thinking</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ PROJECTS ══════════════════ -->
+<section id="projects" class="section">
+  <div class="container">
+    <div class="fade">
+      <div class="sec-label">04 — projects</div>
+      <h2 class="sec-title">Things I've Built</h2>
+      <div class="sec-divider"></div>
+    </div>
+    <div class="proj-grid">
+
+      <!-- Cyberpunk Store -->
+      <div class="proj-card fade">
+        <div class="proj-img-wrap">
+          <img src="Screenshot_19-4-2026_10595_react-project-git-main-alyaaazzam650-coders-projects.vercel.app.jpeg" alt="Cyberpunk Store"/>
+          <div class="proj-overlay">
+            <a href="https://guza-store-e-commerce.vercel.app" class="proj-overlay-btn">Live Demo</a>
+            <a href="https://github.com/alyaaazzam650-coder" target="_blank" class="proj-overlay-btn ghost">GitHub</a>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-tags">
+            <span class="proj-tag">React</span>
+            <span class="proj-tag">CSS</span>
+            <span class="proj-tag">JavaScript</span>
+          </div>
+          <div class="proj-name">Cyberpunk Store</div>
+          <p class="proj-desc">A cyberpunk-themed e-commerce storefront with immersive neon aesthetics, dynamic product displays, and smooth UI interactions.</p>
+          <div class="proj-footer">
+            <div class="proj-links-row">
+              <a href="#" class="proj-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Demo
+              </a>
+              <a href="https://github.com/alyaaazzam650-coder" class="proj-link">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>GitHub
+              </a>
+            </div>
+            <span class="proj-year">2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cookies Store -->
+      <div class="proj-card fade fade-d1">
+        <div class="proj-img-wrap">
+          <img src="Screenshot_24-2-2026_193921_127.0.0.1.jpeg" alt="Cookies Store"/>
+          <div class="proj-overlay">
+            <a href="https://project-silk-eight.vercel.app" class="proj-overlay-btn">Live Demo</a>
+            <a href="https://github.com/alyaaazzam650-coder" target="_blank" class="proj-overlay-btn ghost">GitHub</a>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-tags">
+            <span class="proj-tag">Tailwind CSS</span>
+            <span class="proj-tag">HTML</span>
+            <span class="proj-tag">JS</span>
+          </div>
+          <div class="proj-name">Cookies Store</div>
+          <p class="proj-desc">A delightful cookie e-commerce platform with warm aesthetics, mobile-first design, and dynamic product filtering built with Tailwind CSS.</p>
+          <div class="proj-footer">
+            <div class="proj-links-row">
+              <a href="#" class="proj-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Demo
+              </a>
+              <a href="https://github.com/alyaaazzam650-coder" class="proj-link">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>GitHub
+              </a>
+            </div>
+            <span class="proj-year">2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Netflix -->
+      <!-- <div class="proj-card fade">
+        <div class="proj-img-wrap">
+          <div class="proj-img-placeholder" style="background:linear-gradient(135deg,#1a0000,#e50914,#141414)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <span>Add Netflix screenshot</span>
+          </div>
+          <div class="proj-overlay">
+            <a href="#" class="proj-overlay-btn">Live Demo</a>
+            <a href="https://github.com/alyaaazzam650-coder" target="_blank" class="proj-overlay-btn ghost">GitHub</a>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-tags">
+            <span class="proj-tag">Next.js</span>
+            <span class="proj-tag">React</span>
+            <span class="proj-tag">CSS</span>
+          </div>
+          <div class="proj-name">Netflix Platform Clone</div>
+          <p class="proj-desc">A full-featured Netflix-inspired streaming platform UI with cinematic dark layout, movie browsing, and fully responsive design built with Next.js.</p>
+          <div class="proj-footer">
+            <div class="proj-links-row">
+              <a href="#" class="proj-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Demo</a>
+              <a href="https://github.com/alyaaazzam650-coder" class="proj-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>GitHub</a>
+            </div>
+            <span class="proj-year">2026</span>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Cat Store -->
+      <!-- <div class="proj-card fade fade-d1">
+        <div class="proj-img-wrap">
+          <div class="proj-img-placeholder" style="background:linear-gradient(135deg,#042f2e,#0d9488,#134e4a)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <span>Add Cat Store screenshot</span>
+          </div>
+          <div class="proj-overlay">
+            <a href="#" class="proj-overlay-btn">Live Demo</a>
+            <a href="https://github.com/alyaaazzam650-coder" target="_blank" class="proj-overlay-btn ghost">GitHub</a>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-tags">
+            <span class="proj-tag">React</span>
+            <span class="proj-tag">Vibe Coding</span>
+          </div>
+          <div class="proj-name">Cat Store</div>
+          <p class="proj-desc">A playful cat-themed online store crafted through vibe coding with personality-driven UI, expressive design, and whimsical interactions.</p>
+          <div class="proj-footer">
+            <div class="proj-links-row">
+              <a href="#" class="proj-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Demo</a>
+              <a href="https://github.com/alyaaazzam650-coder" class="proj-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>GitHub</a>
+            </div>
+            <span class="proj-year">2026</span>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- NTI Grad -->
+      <div class="proj-card fade">
+        <div class="proj-img-wrap">
+          <div class="proj-img-placeholder" style="background:linear-gradient(135deg,#1e1b4b,#4f46e5,#312e81)">
+                      <img src="Screenshot_11-6-2026_12950_alyaaazzam650-coder.github.io.jpeg" alt="Cookies Store"/>
+
+          </div>
+          <div class="proj-overlay">
+            <a href="https://alyaaazzam650-coder.github.io/NTI-Graduation-Project/" class="proj-overlay-btn">Live Demo</a>
+            <a href="https://github.com/alyaaazzam650-coder" target="_blank" class="proj-overlay-btn ghost">GitHub</a>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-tags">
+            <span class="proj-tag">React</span>
+            <span class="proj-tag">Tailwind</span>
+            <span class="proj-tag">JS</span>
+          </div>
+          <div class="proj-name">NTI Graduation Project</div>
+          <p class="proj-desc">A comprehensive graduation project showcasing advanced React patterns, component architecture, and modern front-end best practices.</p>
+          <div class="proj-footer">
+            <div class="proj-links-row">
+              <a href="https://alyaaazzam650-coder.github.io/NTI-Graduation-Project/" class="proj-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Demo</a>
+              <a href="https://github.com/alyaaazzam650-coder" class="proj-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>GitHub</a>
+            </div>
+            <span class="proj-year">2025</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Beauty Salon -->
+      <!-- <div class="proj-card fade fade-d1">
+        <div class="proj-img-wrap">
+          <div class="proj-img-placeholder" style="background:linear-gradient(135deg,#4a0020,#be185d,#831843)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <span>Add Beauty Salon screenshot</span>
+          </div>
+          <div class="proj-overlay">
+            <a href="#" class="proj-overlay-btn">Live Demo</a>
+            <a href="https://github.com/alyaaazzam650-coder" target="_blank" class="proj-overlay-btn ghost">GitHub</a>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-tags">
+            <span class="proj-tag">HTML</span>
+            <span class="proj-tag">CSS</span>
+            <span class="proj-tag">Vanilla JS</span>
+          </div>
+          <div class="proj-name">Beauty Salon Landing Page</div>
+          <p class="proj-desc">An elegant beauty salon landing page with a refined feminine aesthetic, smooth animations, service showcase, and appointment booking UI.</p>
+          <div class="proj-footer">
+            <div class="proj-links-row">
+              <a href="#" class="proj-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live Demo</a>
+              <a href="https://github.com/alyaaazzam650-coder" class="proj-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>GitHub</a>
+            </div>
+            <span class="proj-year">2025</span>
+          </div>
+        </div>
+      </div> -->
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ CONTACT ══════════════════ -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="fade">
+      <div class="sec-label">05 — contact</div>
+      <h2 class="sec-title">Let's Connect</h2>
+      <div class="sec-divider"></div>
+    </div>
+    <div class="contact-wrap">
+      <div class="fade fade-d1">
+        <p class="contact-intro">Open to new opportunities, collaborations, and conversations. Whether you have a project in mind, want to collaborate, or just want to say hello — my inbox is always open.</p>
+        <a href="Alyaa Azzam resume.pdf.pdf" download class="contact-dl">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download CV
+        </a>
+      </div>
+      <div class="contact-items fade fade-d2">
+        <a href="mailto:alyaaazzam650@gmail.com" class="contact-item">
+          <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div class="c-info"><div class="c-type">Email</div><div class="c-val">alyaaazzam650@gmail.com</div></div>
+          <span class="c-arrow">→</span>
+        </a>
+        <a href="tel:01552475153" class="contact-item">
+          <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.58 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.76a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg></div>
+          <div class="c-info"><div class="c-type">Phone</div><div class="c-val">01552475153</div></div>
+          <span class="c-arrow">→</span>
+        </a>
+        <a href="https://www.linkedin.com/in/alyaa-azzam-094b20232" target="_blank" rel="noopener" class="contact-item">
+          <div class="c-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></div>
+          <div class="c-info"><div class="c-type">LinkedIn</div><div class="c-val">linkedin.com/in/alyaa-azzam</div></div>
+          <span class="c-arrow">→</span>
+        </a>
+        <a href="https://github.com/alyaaazzam650-coder" target="_blank" rel="noopener" class="contact-item">
+          <div class="c-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg></div>
+          <div class="c-info"><div class="c-type">GitHub</div><div class="c-val">alyaaazzam650-coder</div></div>
+          <span class="c-arrow">→</span>
+        </a>
+        <!-- <a href="https://alyaaazzam.github.io" target="_blank" rel="noopener" class="contact-item">
+          <div class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <div class="c-info"><div class="c-type">Portfolio</div><div class="c-val">alyaaazzam.github.io</div></div>
+          <span class="c-arrow">→</span>
+        </a> -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-left">© 2026 Alyaa Azzam — All rights reserved</span>
+  <!-- <span class="footer-right">Built with HTML · CSS · JS</span> -->
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in') });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
